@@ -16,3 +16,13 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('test', function () {
+    return response('test',200);
+});
+
+Route::post('import_students', 'API\StudentController@import_students');
+Route::post('add_student', 'API\StudentController@add_student');
+Route::post('delete_student', 'API\StudentController@delete_student');
+Route::post('update_student', 'API\StudentController@update_student');

@@ -15,6 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="/css/app.css"/>
 </head>
 <body class="hold-transition sidebar-mini">
+
 <div class="wrapper">
     <!-- Navbar -->
     <nav
@@ -48,12 +49,109 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </nav>
     <!-- /.navbar -->
 
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Add Admin</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ url('/super_admin/add_admin/register_test') }}">
+                        @csrf
+
+                        <div class="form-group row">
+                            <label for="name"
+                                   class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text"
+                                       class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                       name="name" value="{{ old('name') }}" required autofocus>
+
+                                @if ($errors->has('name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email"
+                                   class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email"
+                                       class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                       name="email" value="{{ old('email') }}" required>
+
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password"
+                                   class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password"
+                                       class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                       name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm"
+                                   class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control"
+                                       name="password_confirmation" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="role"
+                                   class="col-md-4 col-form-label text-md-right">Role</label>
+
+                            <div class="col-md-6">
+                                <input id="role" type="text" class="form-control"
+                                       name="role" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Add Admin
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link">
             <img
-                    src="./img/logo.jpg"
+                    src="{{url('img/logo.jpg ')}}"
                     alt="KUSIMS"
                     class="brand-image img-circle elevation-3"
                     style="opacity: .8"
@@ -68,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
                     <img
-                            src="./img/profile.png"
+                            src="{{url('img/profile.png')}}"
                             class="img-circle elevation-2"
                             alt="User Image"
                     />
@@ -89,7 +187,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         data-accordion="false"
                 >
                     <!-- Add icons to the links using the .nav-icon class
-       with font-awesome or any other icon font library
+            with font-awesome or any other icon font library
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i
@@ -109,38 +207,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link active">
+                                <a href="#" class="nav-link">
                                     <i
-                                            class="nav-icon fas fa-portrait"
+                                            class="nav-icon fas fa-building"
                                     ></i>
-                                    <p>Students</p>
+                                    <p>Departments</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i
-                                            class="nav-icon fas fa-user"
+                                            class="nav-icon fas fa-school"
                                     ></i>
-                                    <p>Teachers</p>
+                                    <p>Schools</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{url('/super_admin/add_admin')}}" class="nav-link active">
                                     <i
-                                            class="nav-icon fas fa-list"
+                                            class="nav-icon fas fa-user-cog"
                                     ></i>
-                                    <p>Programs</p>
-                                </a>
-                            </li>
-
-
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i
-                                            class="nav-icon fas fas fa-paste"
-                                    ></i>
-                                    <p>Courses</p>
+                                    <p>Administrators</p>
                                 </a>
                             </li>
 
@@ -148,7 +236,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{url('/logout')}}" class="nav-link">
+                        <a href="{{ url('/logout') }}" class="nav-link">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
                             <p>Logout</p>
                         </a>

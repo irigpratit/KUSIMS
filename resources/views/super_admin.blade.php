@@ -5,14 +5,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
 
     <title>KUSIMS</title>
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="/css/app.css"/>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -53,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Brand Logo -->
         <a href="#" class="brand-link">
             <img
-                    src="./img/logo.jpg"
+                    src="{{url('img/logo.jpg ')}}"
                     alt="KUSIMS"
                     class="brand-image img-circle elevation-3"
                     style="opacity: .8"
@@ -68,7 +68,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
                     <img
-                            src="./img/profile.png"
+                            src="{{url('img/profile.png')}}"
                             class="img-circle elevation-2"
                             alt="User Image"
                     />
@@ -113,7 +113,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <i
                                             class="nav-icon fas fa-building"
                                     ></i>
-                                    <p>Add Department</p>
+                                    <p>Departments</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -121,29 +121,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <i
                                             class="nav-icon fas fa-school"
                                     ></i>
-                                    <p>Add School</p>
+                                    <p>Schools</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i
-                                            class="nav-icon fas fa-user"
-                                    ></i>
-                                    <p>Add Admin</p>
-                                </a>
-                            </li>
-
-
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{url('/super_admin/add_admin')}}" class="nav-link">
                                     <i
                                             class="nav-icon fas fa-user-cog"
                                     ></i>
-                                    <p>Manage Admin</p>
+                                    <p>Administrators</p>
                                 </a>
                             </li>
-
 
 
                         </ul>
