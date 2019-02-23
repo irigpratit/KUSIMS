@@ -25,4 +25,5 @@ Route::get('test', function () {
 Route::post('import_students', 'API\StudentController@import_students');
 Route::post('add_student', 'API\StudentController@add_student');
 Route::post('delete_student', 'API\StudentController@delete_student');
-Route::post('update_student', 'API\StudentController@update_student');
+Route::put('update_student/{registration_no}', 'API\StudentController@update_student');
+Route::get('get_student/{registration_no}', 'API\StudentController@get_student');
