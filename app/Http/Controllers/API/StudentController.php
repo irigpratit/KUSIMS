@@ -33,18 +33,16 @@ class StudentController extends Controller
 
 
         try {
-            $student_information = new StudentInformation();
-            $student_information->name = $name;
-            $student_information->registration_no = $registration_no;
-            $student_information->age = $age;
-            $student_information->save();
+            $student = new StudentInformation();
+            $student->name = $name;
+            $student->registration_no = $registration_no;
+            $student->age = $age;
+            $student->save();
 
         } catch (QueryException $exception) {
-            return response()->json(['failure' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
+            return response()->json(['status' => 'failure', 'log' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
         }
-
-
-        return response()->json(['success' => $student_information, 'code' => $this->successStatus], $this->successStatus);
+        return response()->json(['status' => 'success', 'data' => $student, 'code' => $this->successStatus], $this->successStatus);
     }
 
 
@@ -59,36 +57,58 @@ class StudentController extends Controller
                 $registration_no = $row['registration_no'];
                 $name = $row['name'];
 
-                $student = StudentInformation::where('registration_no', $registration_no)->update(['age' => $age, 'registration_no' => $registration_no, 'name' => $name]);;
+                $student = StudentInformation::where('registration_no', $registration_no)->first();
 
-                if ($student == 0) {
+                if ($student === NULL) {
+                    try {
 
-                    $student_information = new StudentInformation();
+                        $student_information = new StudentInformation();
 
-                    $student_information->name = $name;
-                    $student_information->registration_no = $registration_no;
-                    $student_information->age = $age;
-                    $student_information->save();
+                        $student_information->name = $name;
+                        $student_information->registration_no = $registration_no;
+                        $student_information->age = $age;
+                        $student_information->save();
 
+                    } catch (QueryException $exception) {
+                        return response()->json(['status' => 'failure', 'log' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
+                    }
+                } else {
+                    try {
+                        StudentInformation::where('registration_no', $registration_no)->update(['age' => $age, 'registration_no' => $registration_no, 'name' => $name]);
+                    } catch (QueryException $exception) {
+                        return response()->json(['status' => 'failure', 'log' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
+                    }
                 }
             }
         }
-        return response()->json(['success' => StudentInformation::where('registration_no', $registration_no)->first(), 'code' => $this->successStatus], $this->successStatus);
+        return response()->json(['status' => 'success', 'data' => StudentInformation::where('registration_no', $registration_no)->first(), 'code' => $this->successStatus], $this->successStatus);
+
     }
 
     public function get_student($registration_no)
     {
-
-
         try {
             $student = StudentInformation::where('registration_no', $registration_no)->first();
 
-        } catch (Exception $exception) {
-            return response()->json(['failure' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
+        } catch (QueryException $exception) {
+            return response()->json(['status' => 'failure', 'log' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
         }
 
+        return response()->json(['status' => 'success', 'data' => $student, 'code' => $this->successStatus], $this->successStatus);
+    }
 
-        return response()->json(['success' => $student, 'code' => $this->successStatus], $this->successStatus);
+    public function get_all_students()
+    {
+
+        try {
+            $student = StudentInformation::all();
+
+        } catch (QueryException $exception) {
+            return response()->json(['status' => 'failure', 'log' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
+        }
+
+        return response()->json(['status' => 'success', 'data' => $student, 'code' => $this->successStatus], $this->successStatus);
+
     }
 
     public function update_student(Request $request, $registration_no)
@@ -102,25 +122,22 @@ class StudentController extends Controller
             StudentInformation::where('registration_no', $registration_no)->update(['age' => $age, 'name' => $name]);
 
         } catch (QueryException $exception) {
-            return response()->json(['failure' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
+            return response()->json(['status' => 'failure', 'log' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
         }
 
+        return response()->json(['status' => 'success', 'data' => StudentInformation::where('registration_no', $registration_no)->first(), 'code' => $this->successStatus], $this->successStatus);
 
-        return response()->json(['success' => $registration_no, 'code' => $this->successStatus], $this->successStatus);
     }
 
-    public function delete_student(Request $request)
+    public function delete_student($registration_no)
     {
-        $registration_no = $request['registration_no'];
-
         try {
             StudentInformation::where('registration_no', $registration_no)->delete();
 
-        } catch (Exception $exception) {
-            return response()->json(['failure' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
+        } catch (QueryException $exception) {
+            return response()->json(['status' => 'failure', 'log' => $exception->getMessage(), 'code' => $this->failStatus], $this->failStatus);
         }
 
-
-        return response()->json(['success' => $registration_no, 'code' => $this->successStatus], $this->successStatus);
+        return response()->json(['status' => 'success', 'data' => StudentInformation::where('registration_no', $registration_no)->first(), 'code' => $this->successStatus], $this->successStatus);
     }
 }
