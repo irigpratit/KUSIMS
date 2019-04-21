@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Marks;
 use App\Models\Department;
 use App\Models\StudentDocument;
 use App\Models\StudentAddress;
@@ -152,8 +153,10 @@ class StudentsController extends Controller
         $depts =  Department::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $batches = \App\Models\Batch::get()->pluck('year', 'id')->prepend(trans('global.app_please_select'), '');
         $programs = \App\Models\Program::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        
+        $marks = \App\Models\Marks::where('student_id', $id)->get();
 
-        return view('manage.students.edit', compact('student', 'enum_gender','batches','depts','programs'));
+        return view('manage.students.edit', compact('student', 'enum_gender','batches','depts','programs','marks'));
     }
 
     /**

@@ -17,6 +17,12 @@
          <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#qualification" role="tab" aria-controls="qualification">Qualification</a>
          </li>
+
+         <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#marks" role="tab" aria-controls="marks">Marks</a>
+         </li>
+
+
       </ul>
       <div class="tab-content">
          <div class="tab-pane active show" id="home" role="tabpanel">
@@ -240,8 +246,32 @@
          <div class="tab-pane" id="address" role="tabpanel">
             <student-address id={{$student->id }}></student-address>
          </div>
+
+
          <div class="tab-pane" id="qualification" role="tabpanel">
             <student-qualification id={{$student->id }}></student-qualification>
+         </div>
+
+         <div class="tab-pane" id="marks" role="tabpanel">
+            <div class="card-body table-responsive">
+            <table id="courseTable" class="table table-bordered table-striped">
+                        <tr>
+                           <th>ID</th>
+                           <th>Registration Number</th>
+                           <th>Course Code</th> 
+                           <th>Marks</th>
+                        </tr>
+                        @foreach($marks as $item)
+                        <tr>
+                           <td><p>{{$item->id }}</p></td>
+                           <td><p>{{$item->student_id }}</p></td>
+                           <td><p>{{$item->course_id }}</p></td>
+                           <td><p>{{$item->marks }}</p></td>
+                        </tr>
+                        @endforeach
+                        
+                  </table>
+               </div>
          </div>
       </div>
    </div>
