@@ -1,46 +1,54 @@
 <?php
-
 namespace App;
-
-use Illuminate\Notifications\Notifiable;
+use App\Models\Employee;
+use App\Models\Student;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Passport\HasApiTokens;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use Hash;
 
+/**
+ * Class User
+ *
+ * @package App
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string $remember_token
+*/
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable;
+    use HasRoles;
 
+    protected $fillable = ['name', 'email', 'password', 'remember_token','user_type','first_name','last_name'];
+    
+    public static $enum_user_type = ["Employee" => "Employee", "Student" => "Student", "Administrator" => "Administrator", "SuperAdmin" => "SuperAdmin"];
+    
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * Hash password
+     * @param $input
      */
-    protected $fillable = [
-        'first_name','last_name', 'email', 'password','user_type','role_id',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * Encrypt the password while savinf it.
-     *
-     * @param string $password
-     */
-    public function setPasswordAttribute(string $password)
+    public function setPasswordAttribute($input)
     {
-        $this->attributes['password'] = Hash::make($password);
+        if ($input)
+            $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
     }
-    public function userProfile()
+    
+    
+    public function role()
     {
-        return $this->hasOne('App\UserProfile');
+        return $this->belongsToMany(Role::class, 'role_user');
     }
 
+    public function employee()
+    {
+        return $this->hasOne(Employee::class,'user_id');
+    }
+    public function student()
+    {
+        return $this->hasOne(Student::class,'user_id');
+    }
+
+    
 }

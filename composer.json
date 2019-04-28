@@ -1,6 +1,7 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
+<<<<<<< HEAD
     "keywords": [
         "framework",
         "laravel"
@@ -28,19 +29,49 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+=======
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.0.0",
+        "doctrine/dbal": "^2.5",
+        "filp/whoops": "~2.0",
+        "intervention/image": "^2.3",
+        "laravel/framework": "5.5.*",
+        "laravel/socialite": "3.3.0",
+        "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.3",
+        "maatwebsite/excel": "^3.1",
+        "spatie/laravel-permission": "^2.2"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "classmap": [
+            "database"
+>>>>>>> Code_V2
         ],
         "psr-4": {
             "App\\": "app/"
         },
+<<<<<<< HEAD
         "files": [
             "app/helpers/helpers.php"
         ]
+=======
+        "files": ["app/Helper/DateHelper.php"]
+>>>>>>> Code_V2
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         }
     },
+<<<<<<< HEAD
     "extra": {
         "laravel": {
             "dont-discover": []
@@ -56,13 +87,37 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
+=======
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "php artisan key:generate"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan optimize"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan optimize"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+>>>>>>> Code_V2
         ]
     },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+<<<<<<< HEAD
     },
     "minimum-stability": "dev",
     "prefer-stable": true
+=======
+    }
+>>>>>>> Code_V2
 }

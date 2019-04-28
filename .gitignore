@@ -1,15 +1,22 @@
+<<<<<<< HEAD
 ### Laravel ###
+=======
+>>>>>>> Code_V2
 /node_modules
 /public/hot
 /public/storage
 /storage/*.key
 /vendor
 /.idea
+<<<<<<< HEAD
 /.vscode
+=======
+>>>>>>> Code_V2
 /.vagrant
 Homestead.json
 Homestead.yaml
 npm-debug.log
+<<<<<<< HEAD
 yarn-error.log
 .env
 
@@ -173,3 +180,6 @@ access.log
 /storage/uploads/
 /log/
 /config/deploy/parameters/
+=======
+.env
+>>>>>>> Code_V2

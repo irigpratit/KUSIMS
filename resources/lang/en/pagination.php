@@ -13,7 +13,12 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'previous' => '« Previous',
     'next' => 'Next »',
+=======
+    'previous' => '&laquo; Previous',
+    'next' => 'Next &raquo;',
+>>>>>>> Code_V2
 
 ];

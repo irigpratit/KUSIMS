@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 use Illuminate\Http\Request;
 use App\User;
 
@@ -38,3 +39,8 @@ Route::get('/login/{provider}', 'AuthController@handleLogin');
 Route::get('/social/{provider}/callback', 'AuthController@handleProviderCallback');
 
 Route::resource('/authors', 'AuthorController');
+=======
+Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function () {
+
+});
+>>>>>>> Code_V2

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Hash;
+=======
+>>>>>>> Code_V2
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -28,7 +31,11 @@ class RegisterController extends Controller
      *
      * @var string
      */
+<<<<<<< HEAD
     protected $redirectTo = '/home';
+=======
+    protected $redirectTo = '/admin/home';
+>>>>>>> Code_V2
 
     /**
      * Create a new controller instance.
@@ -59,14 +66,22 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
+<<<<<<< HEAD
      * @return \App\User
+=======
+     * @return User
+>>>>>>> Code_V2
      */
     protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+<<<<<<< HEAD
             'password' => Hash::make($data['password']),
+=======
+            'password' => bcrypt($data['password']),
+>>>>>>> Code_V2
         ]);
     }
 }
